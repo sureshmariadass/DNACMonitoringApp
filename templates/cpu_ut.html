@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{%block content%}
+<section>
+  <nav>
+    <ul>
+       <li><a href="{% url 'devices' %}">Device List</a></li>
+      <li><a href="{% url 'cpu' %}">CPU</a></li>
+      <li><a href="{% url 'memory' %}">Memory</a></li>
+     <!--  <li><a href="#">Tokyo</a></li> -->
+    </ul>
+  </nav>
+  
+  <article>
+
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<div style="height: 100px">
+
+	</div>
+
+<div>
+<center>	<h1>Devices</h1></center>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Host Name</th>
+       <th scope="col">Management IP Adderess</th>
+      <th scope="col">CPU Score</th>
+     
+    <th scope="col">CPU Utilization</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {%for device in device_detail%}
+	 
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{device.response.nwDeviceName}}</td>
+      <td>{{device.response.managementIpAddr}}</td>
+      <td>{{device.response.cpuScore}}</td>
+     {%if 'cpu' in device.response %}
+    <td>{{device.response.cpu}}%</td>
+    {%else%}
+    <td>Unavailable</td>
+    {%endif%}
+    </tr>
+    
+    {%endfor%}
+    
+    
+  </tbody>
+</table>
+   
+
+
+</div>
+
+  </article>
+</section>
+{%endblock%}
+
+{%block pagestyle%}
+<link rel="stylesheet" href="{% static 'css/device_list.css' %}">
+<style>
+.canvasjs-chart-credit{
+
+display:none;
+
+}
+</style>
+<script type="text/javascript">
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "light2", // "light1","light2", "dark1", "dark2"
+	animationEnabled: true, // change to true, false		
+	title:{
+		text: "CPU Utilizationn In Percentage"
+	},
+	data: [
+	{
+		// Change type to,"column" "bar", "area", "spline", "pie",etc.
+		type: "bar",
+		dataPoints: [
+		 	{%for dev in device_detail%}
+		{%if 'cpu' in dev.response %}
+
+			{ label: "{{dev.response.nwDeviceName}}",  y: {{dev.response.cpu}}  },
+			 //{%else%}
+			 //{ label: "{{dev.response.nwDeviceName}}",  y: 0  },
+{%endif%}
+
+			{%endfor%}
+		
+		
+		]
+	}
+	]
+});
+chart.render();
+
+}
+</script>
+{%endblock%}
+
+
+{%block script%}
+
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
+{%endblock%}

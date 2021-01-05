@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{%block content%}
+<br>
+<br>
+<div style="padding: 150px 40px 150px 350px" class="container"  style="width: 50%;">
+  
+  	{% if form.errors %}
+  	<div class=" alert alert-danger" role="alert">
+  		<strong>Invalid Credentials</strong>
+  	</div>
+  	{% else %}
+  <!-- <h3> Enter your credentials to login </h3> -->
+  	{% endif %}
+
+  		<form role="form" method="post" >
+    		{% csrf_token %}
+    		{{ form.as_p }}
+				{% if request.GET.next %}
+    		<input type="hidden" name="next" value="{{request.GET.next}}"/>
+				{%endif%}
+    		<button class="btn btn-primary" style="margin-left: 176px" type="submit">Login</button>
+    		
+    		<!-- <br>New User <a href="../register"> Click here! </a> for sign-up -->
+  		</form>
+			
+  </div>
+  <script>
+		function myfunc() {
+    	document.getElementById("Login").reset();
+		}
+	</script>
+{%endblock%}
