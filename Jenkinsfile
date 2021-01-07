@@ -14,7 +14,7 @@ node {
             sh 'virtualenv env -p python3'
             sh '. env/bin/activate'
             sh 'env/bin/pip install -r requirements.txt'
-            sh 'env/bin/python3.5 manage.py test'
+            sh 'env/bin/python3 manage.py test'
 
         stage 'Deploy'
             sh './deploy_prod.sh'
