@@ -15,11 +15,10 @@ node {
             sh '. env/bin/activate'
             sh 'env/bin/pip install -r requirements.txt'
             sh 'env/bin/python3 manage.py test'
+            sh 'ls'
 
         stage 'Deploy'
-            sh 'sshpass -p C1sc0123 ssh -tt -o StrictHostKeyChecking=no root@10.171.92.112'
-            sh 'cd /DNAC/'
-            sh 'mkdir test'
+            sh './deploy_prod.sh'
 
         stage 'Publish results'
             echo "Build successful: `${env.JOB_NAME}#${env.BUILD_NUMBER}` <${env.BUILD_URL}|Open in Jenkins>"
