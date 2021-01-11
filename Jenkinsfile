@@ -16,6 +16,7 @@ node {
             sh 'env/bin/pip install -r requirements.txt'
             sh 'env/bin/python3 manage.py test'
             sh 'ls'
+            sh 'chmod +x deploy_prod.sh'
 
         stage 'Deploy'
             sh './deploy_prod.sh'
