@@ -17,7 +17,9 @@ node {
             sh 'env/bin/python3 manage.py test'
 
         stage 'Deploy'
-            sh './deploy_prod.sh'
+            sh 'sshpass -p C1sc0123 ssh root@10.171.92.112'
+            sh 'cd /DNAC/'
+            sh 'mkdir test'
 
         stage 'Publish results'
             echo "Build successful: `${env.JOB_NAME}#${env.BUILD_NUMBER}` <${env.BUILD_URL}|Open in Jenkins>"
