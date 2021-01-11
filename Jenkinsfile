@@ -17,7 +17,7 @@ node {
             sh 'env/bin/python3 manage.py test'
 
         stage 'Deploy'
-            sh 'sshpass -p C1sc0123 ssh -tt root@10.171.92.112'
+            sh 'sshpass -p C1sc0123 ssh -tt -o StrictHostKeyChecking=no root@10.171.92.112'
             sh 'cd /DNAC/'
             sh 'mkdir test'
 
