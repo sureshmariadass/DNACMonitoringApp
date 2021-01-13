@@ -13,7 +13,6 @@ sshpass -p C1sc0123 ssh -tt -o StrictHostKeyChecking=no root@10.171.92.112 <<EOF
   pip install -r requirements.txt
   chmod +x manage.py
   ./manage.py migrate
-  ./manage.py collectstatic
   cd ..
   chmod 777 -rf dnac_app1
   systemctl restart apache2
