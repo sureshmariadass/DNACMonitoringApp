@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l-%-t154m#6abo4@7v6-(8p4dbl98hrbt%(t$7$vb)#x5j8jf$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["10.171.92.112"]
 
 
 # Application definition
@@ -39,13 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'liveapi',
 ]
-JENKINS_TASKS = (
-    'django_jenkins.tasks.run_pep8',
-    'django_jenkins.tasks.run_pyflakes',
-    'django_jenkins.tasks.run_jslint',
-    'django_jenkins.tasks.run_csslint',
-    'django_jenkins.tasks.run_sloccount'
-)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,8 +120,9 @@ LOGIN_REDIRECT_URL='/devices'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_DIRS='static'
+#STATIC_DIRS='static'
 
-STATICFILES_DIRS=[
-    STATIC_DIRS,
-]
+#STATICFILES_DIRS=[
+#    STATIC_DIRS,
+#]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')

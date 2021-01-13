@@ -11,6 +11,8 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+sys.path.append('/usr/local/dnac_app1')
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dnac_monitoring.settings')
 
 application = get_wsgi_application()
